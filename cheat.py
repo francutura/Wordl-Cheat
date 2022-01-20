@@ -1,4 +1,5 @@
 import string
+import argparse
 
 
 def create_score_map(words):
@@ -70,13 +71,53 @@ def find_optimal_word(scores, used_letters):
     return sorted(new_scores, key=lambda x: (x[2], -x[1]))[0][0]
 
 
-if __name__ == "__main__":
+def letters_in_words(words):
+    """Return set of letters found
+    in a list of words
+
+    Args:
+        words (list): list of words
+
+    Returns:
+        set: set of letters
+    """
+    letters = set()
+
+    for word in words:
+        for letter in word:
+            letters.add(letter)
+
+    return letters
+
+
+def run(hard=False):
+    """Run main guesser.
+    Two modes avaliable hard mode or normal.
+    Represents the same modes as wordle modes.
+
+    Args:
+        hard (bool, optional): Is the game in hard mode?. Defaults to False.
+    """
     words = load_words("./words.txt")
+    working_words = words.copy()
     used_letters = set()
     ten_or_less = False
 
     while True:
-        scores = create_score_map(words)
+
+        if not hard:
+            avaliable_letters = letters_in_words(words)
+            working_words = list(
+                filter(
+                    lambda x: set(letter for letter in x).union(avaliable_letters)
+                    == avaliable_letters,
+                    working_words,
+                )
+            )
+            scores = create_score_map(working_words)
+        else:
+            scores = create_score_map(words)
+
         optimal_word = find_optimal_word(scores, used_letters)
 
         print(f"Use this word next: {optimal_word}")
@@ -97,7 +138,11 @@ if __name__ == "__main__":
             if num in {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
         ]
 
-        words.remove(optimal_word)
+        green_letters = set(optimal_word[index] for index in green)
+        yellow_letters = set(optimal_word[index] for index in yellow)
+
+        if optimal_word in words:
+            words.remove(optimal_word)
 
         # leave words that have letters at the green positons
         for index in green:
@@ -111,6 +156,11 @@ if __name__ == "__main__":
             if index in yellow:
                 words = list(filter(lambda x: x[index] != optimal_word[index], words))
             else:
+                if (
+                    optimal_word[index] in green_letters
+                    or optimal_word[index] in yellow_letters
+                ):
+                    continue
                 words = list(filter(lambda x: optimal_word[index] not in x, words))
 
         # leave words that have yellow letters in them
@@ -134,3 +184,15 @@ if __name__ == "__main__":
 
         for letter in optimal_word:
             used_letters.add(letter)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Wordle cheater - command line program to help you choose the next word for the game wordle"
+    )
+    parser.add_argument(
+        "--hard", default=False, action="store_true", help="Enable hard mode play"
+    )
+    parsed = parser.parse_args()
+
+    run(parsed.hard)
