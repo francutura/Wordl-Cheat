@@ -16,7 +16,7 @@ You can seperate the indexes with spaces commas, or you don't have to seperate t
 This is from day 215
 
 ```
-fran@franki:~/projects/wordle_cheat/wordl-cheat$ python3 cheat.py
+:$ python3 cheat.py
 Use this word next: arose
 Which letters are green? (letters go from 0 to 4)
 Which letters are yellow? (letters go from 0 to 4) 1,2
