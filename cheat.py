@@ -81,8 +81,8 @@ if __name__ == "__main__":
 
         print(f"Use this word next: {optimal_word}")
 
-        green = input("Which letters were at exact place? (letters go from 0 to 4) ")
-        yellow = input("Which letters are present? (letters go from 0 to 4) ")
+        green = input("Which letters are green? (letters go from 0 to 4) ")
+        yellow = input("Which letters are yellow? (letters go from 0 to 4) ")
         print()
 
         green = [
