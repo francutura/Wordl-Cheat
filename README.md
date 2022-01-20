@@ -22,6 +22,43 @@ optional arguments:
 Once you get a word from the script enter it into wordle. Next you enter the indexes of letters which were green or yellow. Indexes range from 0 to 4.
 You can seperate the indexes with spaces commas, or you don't have to seperate them at all. Once you  get a new word enter it again untill you got it!
 
+
+## How it works
+
+Here are the number of occurences of each letter in all English 5 letter words
+
+```
+  "s": 3033,
+  "e": 3009,
+  "a": 2348,
+  "o": 1914,
+  "r": 1910,
+  "i": 1592,
+  "l": 1586,
+  "t": 1585,
+  "n": 1285,
+  "d": 1181,
+  "u": 1089,
+  "c": 964,
+  "p": 955,
+  "y": 886,
+  "m": 843,
+  "h": 810,
+  "b": 715,
+  "g": 679,
+  "k": 596,
+  "f": 561,
+  "w": 505,
+  "v": 318,
+  "x": 139,
+  "z": 135,
+  "j": 89,
+  "q": 53
+```
+
+We use this and a simple heuristic tracking all the letters used so far to determine the word to use next.
+The best first word to use is AROSE since it's a valid English word and its letters are the most common so you have the highest chance to guess some. The frequency table is rebuilt after every guess and subsequent optimal words are printed on the screen
+
 ## Example
 
 This is from day 215
