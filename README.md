@@ -38,4 +38,6 @@ Which letters are yellow? (letters go from 0 to 4) 24
 DONE! the word is robot
 ```
 
+![Wordle example image](https://github.com/francutura/wordle-cheat/blob/main/day_215_img.png?raw=true)
+
 Have fun!
