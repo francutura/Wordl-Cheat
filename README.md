@@ -22,6 +22,8 @@ optional arguments:
 Once you get a word from the script enter it into wordle. Next you enter the indexes of letters which were green or yellow. Indexes range from 0 to 4.
 You can seperate the indexes with spaces commas, or you don't have to seperate them at all. Once you  get a new word enter it again untill you got it!
 
+You can also use the flag --hard to enable hard mode guessing. Hard mode means that any revealed hints must be used in subsequent guesses
+
 
 ## How it works
 
